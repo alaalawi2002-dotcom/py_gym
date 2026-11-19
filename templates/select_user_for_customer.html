@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>المشتركين والمدربين</title>
+
+
+    <style>
+
+        /* =========================================
+           RESET
+        ========================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            font-family:
+                "Segoe UI",
+                Tahoma,
+                Arial,
+                sans-serif;
+
+            background: #f7f8fc;
+
+            color: #111827;
+
+            min-height: 100vh;
+        }
+
+
+        button,
+        input {
+            font-family: inherit;
+        }
+
+
+        /* =========================================
+           PAGE
+        ========================================= */
+
+        .page {
+
+            width: 100%;
+
+            max-width: 1500px;
+
+            margin: auto;
+
+            padding: 32px;
+        }
+
+
+        /* =========================================
+           TOP HEADER
+        ========================================= */
+
+        .top {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 25px;
+
+            margin-bottom: 30px;
+        }
+
+
+        .heading {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+        }
+
+
+        .heading-icon {
+
+            width: 54px;
+            height: 54px;
+
+            border-radius: 16px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: #111827;
+
+            color: white;
+
+            font-size: 22px;
+        }
+
+
+        .heading h1 {
+
+            font-size: 27px;
+
+            font-weight: 750;
+
+            letter-spacing: -0.5px;
+        }
+
+
+        .heading p {
+
+            margin-top: 5px;
+
+            color: #8b95a7;
+
+            font-size: 14px;
+        }
+
+
+        /* =========================================
+           HEADER RIGHT
+        ========================================= */
+
+        .top-actions {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+        }
+
+
+        .total {
+
+            height: 46px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            padding: 0 15px;
+
+            border: 1px solid #e8eaf0;
+
+            background: white;
+
+            border-radius: 13px;
+
+            color: #687386;
+
+            font-size: 13px;
+        }
+
+
+        .total-number {
+
+            min-width: 29px;
+            height: 29px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: #f1f3f8;
+
+            color: #111827;
+
+            border-radius: 9px;
+
+            font-weight: 700;
+        }
+
+
+        /* =========================================
+           SEARCH
+        ========================================= */
+
+        .toolbar {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 15px;
+
+            margin-bottom: 22px;
+        }
+
+
+        .search {
+
+            position: relative;
+
+            width: 350px;
+        }
+
+
+        .search input {
+
+            width: 100%;
+
+            height: 48px;
+
+            border: 1px solid #e7e9ef;
+
+            background: white;
+
+            border-radius: 14px;
+
+            outline: none;
+
+            padding:
+                0 45px 0 16px;
+
+            font-size: 14px;
+
+            color: #111827;
+
+            transition: 0.2s;
+        }
+
+
+        .search input:focus {
+
+            border-color: #c7cbd5;
+
+            box-shadow:
+                0 0 0 4px
+                rgba(17, 24, 39, 0.04);
+        }
+
+
+        .search-icon {
+
+            position: absolute;
+
+            right: 16px;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            color: #9aa2b1;
+
+            font-size: 17px;
+        }
+
+
+        .result-text {
+
+            color: #8b95a7;
+
+            font-size: 13px;
+        }
+
+
+        /* =========================================
+           GRID
+        ========================================= */
+
+        .members {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    auto-fill,
+                    minmax(380px, 1fr)
+                );
+
+            gap: 20px;
+        }
+
+
+        /* =========================================
+           CARD
+        ========================================= */
+
+        .member-card {
+
+            background: white;
+
+            border: 1px solid #e9ebf1;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+            transition:
+                transform .25s ease,
+                box-shadow .25s ease,
+                border-color .25s ease;
+        }
+
+
+        .member-card:hover {
+
+            transform: translateY(-4px);
+
+            border-color: #dfe2e9;
+
+            box-shadow:
+                0 18px 45px
+                rgba(17, 24, 39, 0.08);
+        }
+
+
+        /* =========================================
+           CARD HEADER
+        ========================================= */
+
+        .member-header {
+
+            padding: 20px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            border-bottom: 1px solid #f0f1f4;
+        }
+
+
+        .member {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+        }
+
+
+        .avatar {
+
+            width: 50px;
+            height: 50px;
+
+            border-radius: 15px;
+
+            background: #f1f3f7;
+
+            color: #111827;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 18px;
+
+            font-weight: 800;
+        }
+
+
+        .member-name {
+
+            font-size: 16px;
+
+            font-weight: 750;
+
+            margin-bottom: 4px;
+        }
+
+
+        .member-subtitle {
+
+            font-size: 12px;
+
+            color: #9aa2b1;
+        }
+
+
+        .active {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 6px;
+
+            color: #059669;
+
+            background: #ecfdf5;
+
+            padding: 6px 9px;
+
+            border-radius: 9px;
+
+            font-size: 11px;
+
+            font-weight: 700;
+        }
+
+
+        .active-dot {
+
+            width: 6px;
+            height: 6px;
+
+            border-radius: 50%;
+
+            background: #10b981;
+        }
+
+
+        /* =========================================
+           BODY
+        ========================================= */
+
+        .member-body {
+
+            padding: 20px;
+        }
+
+
+        /* =========================================
+           USER INFO
+        ========================================= */
+
+        .info-grid {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 10px;
+
+            margin-bottom: 18px;
+        }
+
+
+        .info-box {
+
+            padding: 13px;
+
+            background: #fafbfc;
+
+            border: 1px solid #f0f1f4;
+
+            border-radius: 13px;
+        }
+
+
+        .info-label {
+
+            color: #9aa2b1;
+
+            font-size: 11px;
+
+            margin-bottom: 6px;
+        }
+
+
+        .info-value {
+
+            color: #252b36;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            overflow-wrap: anywhere;
+        }
+
+
+        /* =========================================
+           CATEGORY
+        ========================================= */
+
+        .category-row {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 13px 0;
+
+            border-top: 1px solid #f0f1f4;
+
+            border-bottom: 1px solid #f0f1f4;
+
+            margin-bottom: 18px;
+        }
+
+
+        .category-title {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            color: #7c8494;
+
+            font-size: 12px;
+        }
+
+
+        .category-value {
+
+            background: #f4f3ff;
+
+            color: #635bce;
+
+            padding: 7px 11px;
+
+            border-radius: 9px;
+
+            font-size: 12px;
+
+            font-weight: 700;
+        }
+
+
+        /* =========================================
+           COACH
+        ========================================= */
+
+        .coach {
+
+            border: 1px solid #edf0f5;
+
+            border-radius: 16px;
+
+            padding: 16px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #fbfcff,
+                    #f8f9fc
+                );
+        }
+
+
+        .coach-header {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 11px;
+
+            margin-bottom: 15px;
+        }
+
+
+        .coach-icon {
+
+            width: 38px;
+            height: 38px;
+
+            border-radius: 11px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: #111827;
+
+            color: white;
+
+            font-size: 16px;
+        }
+
+
+        .coach-title {
+
+            font-size: 13px;
+
+            font-weight: 750;
+        }
+
+
+        .coach-subtitle {
+
+            margin-top: 3px;
+
+            color: #9aa2b1;
+
+            font-size: 11px;
+        }
+
+
+        .coach-info {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 8px;
+        }
+
+
+        .coach-item {
+
+            padding: 10px;
+
+            background: white;
+
+            border: 1px solid #edf0f4;
+
+            border-radius: 10px;
+        }
+
+
+        .coach-item.full {
+
+            grid-column: 1 / -1;
+        }
+
+
+        .coach-label {
+
+            display: block;
+
+            color: #a0a7b4;
+
+            font-size: 10px;
+
+            margin-bottom: 5px;
+        }
+
+
+        .coach-value {
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            color: #252b36;
+
+            overflow-wrap: anywhere;
+        }
+
+
+        /* =========================================
+           EMPTY
+        ========================================= */
+
+        .empty {
+
+            background: white;
+
+            border: 1px solid #e9ebf1;
+
+            border-radius: 20px;
+
+            padding: 70px 20px;
+
+            text-align: center;
+        }
+
+
+        .empty-icon {
+
+            width: 70px;
+            height: 70px;
+
+            margin: auto auto 18px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 20px;
+
+            background: #f4f5f8;
+
+            font-size: 28px;
+        }
+
+
+        .empty h2 {
+
+            font-size: 20px;
+
+            margin-bottom: 7px;
+        }
+
+
+        .empty p {
+
+            color: #9aa2b1;
+
+            font-size: 13px;
+        }
+
+
+        /* =========================================
+           TABLET
+        ========================================= */
+
+        @media (max-width: 900px) {
+
+            .page {
+
+                padding: 22px;
+            }
+
+
+            .top {
+
+                align-items: flex-start;
+            }
+
+
+            .members {
+
+                grid-template-columns:
+                    repeat(
+                        auto-fill,
+                        minmax(320px, 1fr)
+                    );
+            }
+
+
+            .search {
+
+                width: 280px;
+            }
+        }
+
+
+        /* =========================================
+           MOBILE
+        ========================================= */
+
+        @media (max-width: 650px) {
+
+            .page {
+
+                padding: 14px;
+            }
+
+
+            .top {
+
+                flex-direction: column;
+
+                align-items: stretch;
+
+                margin-bottom: 20px;
+            }
+
+
+            .heading-icon {
+
+                width: 48px;
+                height: 48px;
+
+                border-radius: 14px;
+            }
+
+
+            .heading h1 {
+
+                font-size: 21px;
+            }
+
+
+            .heading p {
+
+                font-size: 12px;
+            }
+
+
+            .top-actions {
+
+                width: 100%;
+            }
+
+
+            .total {
+
+                width: 100%;
+
+                justify-content: space-between;
+            }
+
+
+            .toolbar {
+
+                flex-direction: column;
+
+                align-items: stretch;
+
+                margin-bottom: 17px;
+            }
+
+
+            .search {
+
+                width: 100%;
+            }
+
+
+            .result-text {
+
+                display: none;
+            }
+
+
+            .members {
+
+                grid-template-columns: 1fr;
+
+                gap: 14px;
+            }
+
+
+            .member-header {
+
+                padding: 17px;
+            }
+
+
+            .member-body {
+
+                padding: 17px;
+            }
+
+
+            .member-name {
+
+                font-size: 15px;
+            }
+
+
+            .active {
+
+                font-size: 10px;
+
+                padding: 5px 8px;
+            }
+        }
+
+
+        /* =========================================
+           SMALL MOBILE
+        ========================================= */
+
+        @media (max-width: 400px) {
+
+            .member-header {
+
+                align-items: flex-start;
+
+                gap: 10px;
+            }
+
+
+            .info-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .coach-info {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .coach-item.full {
+
+                grid-column: auto;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="page">
+
+
+    <!-- =========================================
+         HEADER
+    ========================================== -->
+
+    <header class="top">
+
+        <div class="heading">
+
+            <div class="heading-icon">
+                👥
+            </div>
+
+            <div>
+
+                <h1>
+                    المشتركين والمدربين
+                </h1>
+
+                <p>
+                    إدارة بيانات المشتركين والمدربين في النادي
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="top-actions">
+
+            <div class="total">
+
+                <span>
+                    إجمالي السجلات
+                </span>
+
+                <div class="total-number">
+                    {{ all|length }}
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================================
+         TOOLBAR
+    ========================================== -->
+
+    <div class="toolbar">
+
+        <div class="search">
+
+            <span class="search-icon">
+                🔍
+            </span>
+
+            <input
+                type="text"
+                id="search"
+                placeholder="ابحث عن مشترك..."
+            >
+
+        </div>
+
+
+        <div class="result-text">
+
+            عرض بيانات المشتركين والمدربين
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================
+         DATA
+    ========================================== -->
+
+    {% if all %}
+
+        <div class="members" id="members">
+
+
+            {% for a in all %}
+
+                <div class="member-card">
+
+
+                    <!-- HEADER -->
+
+                    <div class="member-header">
+
+                        <div class="member">
+
+                            <div class="avatar">
+
+                                {{ a[0][0] }}
+
+                            </div>
+
+
+                            <div>
+
+                                <div class="member-name">
+                                    {{ a[0] }}
+                                </div>
+
+                                <div class="member-subtitle">
+                                    مشترك في النادي
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="active">
+
+                            <span class="active-dot"></span>
+
+                            نشط
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- BODY -->
+
+                    <div class="member-body">
+
+
+                        <!-- USER -->
+
+                        <div class="info-grid">
+
+
+                            <div class="info-box">
+
+                                <div class="info-label">
+                                    الاسم
+                                </div>
+
+                                <div class="info-value">
+                                    {{ a[0] }}
+                                </div>
+
+                            </div>
+
+
+                            <div class="info-box">
+
+                                <div class="info-label">
+                                    رقم الهاتف
+                                </div>
+
+                                <div class="info-value">
+                                    {{ a[1] }}
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+
+                        <!-- CATEGORY -->
+
+                        <div class="category-row">
+
+                            <div class="category-title">
+
+                                <span>
+                                    🎯
+                                </span>
+
+                                التصنيف
+
+                            </div>
+
+
+                            <div class="category-value">
+
+                                {{ a[2] }}
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- COACH -->
+
+                        <div class="coach">
+
+
+                            <div class="coach-header">
+
+                                <div class="coach-icon">
+                                    🏋️
+                                </div>
+
+
+                                <div>
+
+                                    <div class="coach-title">
+                                        المدرب المسؤول
+                                    </div>
+
+                                    <div class="coach-subtitle">
+                                        بيانات المدرب
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="coach-info">
+
+
+                                <div class="coach-item">
+
+                                    <span class="coach-label">
+                                        الاسم
+                                    </span>
+
+                                    <span class="coach-value">
+                                        {{ a[3] }}
+                                    </span>
+
+                                </div>
+
+
+                                <div class="coach-item">
+
+                                    <span class="coach-label">
+                                        الهاتف
+                                    </span>
+
+                                    <span class="coach-value">
+                                        {{ a[4] }}
+                                    </span>
+
+                                </div>
+
+
+                                <div class="coach-item">
+
+                                    <span class="coach-label">
+                                        العمر
+                                    </span>
+
+                                    <span class="coach-value">
+                                        {{ a[5] }}
+                                    </span>
+
+                                </div>
+
+
+                                <div class="coach-item">
+
+                                    <span class="coach-label">
+                                        التخصص
+                                    </span>
+
+                                    <span class="coach-value">
+                                        {{ a[6] }}
+                                    </span>
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+
+        </div>
+
+
+    {% else %}
+
+
+        <div class="empty">
+
+            <div class="empty-icon">
+                👥
+            </div>
+
+            <h2>
+                لا توجد بيانات
+            </h2>
+
+            <p>
+                لم يتم العثور على أي مشتركين حاليًا.
+            </p>
+
+        </div>
+
+
+    {% endif %}
+
+
+</div>
+
+
+<script>
+
+    const search = document.getElementById("search");
+
+    const cards = document.querySelectorAll(".member-card");
+
+
+    search.addEventListener("input", function () {
+
+        const value =
+            this.value
+                .trim()
+                .toLowerCase();
+
+
+        cards.forEach(function (card) {
+
+            const text =
+                card.innerText.toLowerCase();
+
+
+            if (text.includes(value)) {
+
+                card.style.display = "";
+
+            } else {
+
+                card.style.display = "none";
+
+            }
+
+        });
+
+    });
+
+</script>
+
+
+</body>
+
+</html>

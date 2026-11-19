@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Gym - Add Member</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+
+        body {
+            margin: 0;
+            height: 100vh;
+            background: linear-gradient(135deg, #1f2937, #111827);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+        .container {
+
+            width: 400px;
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+
+        }
+
+
+        h2 {
+
+            text-align: center;
+            color: #111827;
+            margin-bottom: 25px;
+
+        }
+
+
+        .input-group {
+
+            margin-bottom: 18px;
+
+        }
+
+
+        label {
+
+            display: block;
+            margin-bottom: 7px;
+            color: #374151;
+            font-weight: bold;
+
+        }
+
+
+        input {
+
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #d1d5db;
+            font-size: 15px;
+
+        }
+
+
+        input:focus {
+
+            outline: none;
+            border-color: #2563eb;
+
+        }
+
+
+        .btn {
+
+            width: 100%;
+            padding: 13px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 17px;
+            cursor: pointer;
+            margin-top: 10px;
+
+        }
+
+
+        .btn:hover {
+
+            background: #1d4ed8;
+
+        }
+
+
+        .logo {
+
+            text-align: center;
+            font-size: 40px;
+            margin-bottom: 10px;
+
+        }
+
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <div class="logo">
+        💪
+    </div>
+
+
+    <h2>Add Gym Member</h2>
+
+
+    <form method="POST">
+
+        {{ form.hidden_tag() }}
+
+
+        <div class="input-group">
+
+            <label>Name</label>
+
+            {{ form.name(placeholder="Enter member name") }}
+
+        </div>
+
+
+
+        <div class="input-group">
+
+            <label>Phone</label>
+
+            {{ form.phone(placeholder="Enter phone number") }}
+
+        </div>
+
+
+
+        <div class="input-group">
+
+            <label>Age</label>
+
+            {{ form.age(placeholder="Enter age") }}
+
+        </div>
+
+
+
+        {{ form.submit(class="btn") }}
+
+
+    </form>
+
+
+</div>
+
+
+</body>
+
+</html>

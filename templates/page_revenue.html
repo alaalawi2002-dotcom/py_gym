@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Revenue Management</title>
+
+<!-- Bootstrap -->
+<link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet">
+
+<!-- Bootstrap Icons -->
+<link
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+    rel="stylesheet">
+
+
+<style>
+
+    body {
+
+        background: #f4f7fb;
+
+        font-family:
+            "Segoe UI",
+            Tahoma,
+            Geneva,
+            Verdana,
+            sans-serif;
+
+        padding: 35px;
+
+    }
+
+
+    /* =========================
+       Header
+    ========================= */
+
+    .page-header {
+
+        background:
+            linear-gradient(
+                135deg,
+                #355CFF,
+                #7B3FE4
+            );
+
+        color: white;
+
+        padding: 30px;
+
+        border-radius: 22px;
+
+        margin-bottom: 30px;
+
+        box-shadow:
+            0 15px 35px
+            rgba(0,0,0,.15);
+
+    }
+
+
+    .page-header h1 {
+
+        font-weight: 800;
+
+        margin-bottom: 8px;
+
+    }
+
+
+    .page-header p {
+
+        margin: 0;
+
+        opacity: .9;
+
+    }
+
+
+    /* =========================
+       Revenue Table
+    ========================= */
+
+    .revenue-container {
+
+        background: white;
+
+        border-radius: 22px;
+
+        padding: 25px;
+
+        box-shadow:
+            0 10px 30px
+            rgba(0,0,0,.08);
+
+    }
+
+
+    .table-title {
+
+        display: flex;
+
+        justify-content: space-between;
+
+        align-items: center;
+
+        margin-bottom: 20px;
+
+    }
+
+
+    .table-title h3 {
+
+        font-weight: 800;
+
+        margin: 0;
+
+    }
+
+
+    .table-title i {
+
+        color: #355CFF;
+
+    }
+
+
+    .table-responsive {
+
+        border-radius: 15px;
+
+    }
+
+
+    .table {
+
+        margin: 0;
+
+    }
+
+
+    .table thead {
+
+        background:
+            linear-gradient(
+                135deg,
+                #355CFF,
+                #7B3FE4
+            );
+
+        color: white;
+
+    }
+
+
+    .table th {
+
+        padding: 17px;
+
+        text-align: center;
+
+        white-space: nowrap;
+
+    }
+
+
+    .table td {
+
+        padding: 16px;
+
+        text-align: center;
+
+        vertical-align: middle;
+
+    }
+
+
+    .table tbody tr {
+
+        transition: .25s;
+
+    }
+
+
+    .table tbody tr:hover {
+
+        background: #f3f6ff;
+
+    }
+
+
+    /* =========================
+       Member
+    ========================= */
+
+    .member-name {
+
+        font-weight: 700;
+
+        color: #212529;
+
+    }
+
+
+    .member-id {
+
+        color: #6c757d;
+
+        font-size: 13px;
+
+    }
+
+
+    .phone {
+
+        color: #198754;
+
+        font-weight: 600;
+
+    }
+
+
+    /* =========================
+       Amount
+    ========================= */
+
+    .amount {
+
+        color: #198754;
+
+        font-weight: 800;
+
+        font-size: 17px;
+
+    }
+
+
+    .amount i {
+
+        margin-right: 5px;
+
+    }
+
+
+    /* =========================
+       Plan
+    ========================= */
+
+    .plan-badge {
+
+        background: #6f42c1;
+
+        color: white;
+
+        padding: 7px 14px;
+
+        border-radius: 30px;
+
+        font-weight: 600;
+
+        display: inline-block;
+
+    }
+
+
+    /* =========================
+       Payment Status
+    ========================= */
+
+    .status {
+
+        padding: 7px 14px;
+
+        border-radius: 30px;
+
+        font-weight: 700;
+
+        display: inline-block;
+
+    }
+
+
+    .status-paid {
+
+        background: #d1e7dd;
+
+        color: #146c43;
+
+    }
+
+
+    .status-pending {
+
+        background: #fff3cd;
+
+        color: #997404;
+
+    }
+
+
+    .status-failed {
+
+        background: #f8d7da;
+
+        color: #b02a37;
+
+    }
+
+
+    /* =========================
+       Empty
+    ========================= */
+
+    .empty {
+
+        text-align: center;
+
+        padding: 60px 20px;
+
+        color: #6c757d;
+
+    }
+
+
+    .empty i {
+
+        font-size: 55px;
+
+        display: block;
+
+        margin-bottom: 15px;
+
+        color: #355CFF;
+
+    }
+
+
+    /* =========================
+       Mobile
+    ========================= */
+
+    @media(max-width:768px) {
+
+        body {
+
+            padding: 15px;
+
+        }
+
+
+        .page-header {
+
+            padding: 22px;
+
+        }
+
+
+        .page-header h1 {
+
+            font-size: 25px;
+
+        }
+
+
+        .revenue-container {
+
+            padding: 15px;
+
+        }
+
+    }
+
+</style>
+```
+
+</head>
+
+<body>
+
+<div class="container-fluid">
+
+```
+<!-- =========================
+     Page Header
+========================= -->
+
+<div class="page-header">
+
+    <h1>
+
+        <i class="bi bi-credit-card-fill"></i>
+
+        Revenue Management
+
+    </h1>
+
+    <p>
+
+        View and manage all payment transactions
+
+    </p>
+
+</div>
+
+
+
+<!-- =========================
+     Revenue Table
+========================= -->
+
+<div class="revenue-container">
+
+
+    <div class="table-title">
+
+        <h3>
+
+            <i class="bi bi-cash-stack"></i>
+
+            Payment Transactions
+
+        </h3>
+
+    </div>
+
+
+
+    <div class="table-responsive">
+
+
+        <table class="table table-hover align-middle">
+
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        ID
+                    </th>
+
+                    <th>
+                        Member
+                    </th>
+
+                    <th>
+                        Phone
+                    </th>
+
+                    <th>
+                        Amount
+                    </th>
+
+                    <th>
+                        Payment Date
+                    </th>
+
+                    <th>
+                        Status
+                    </th>
+
+                    <th>
+                        Plan
+                    </th>
+                     
+                    <th>Actions</th>
+                </tr>
+
+            </thead>
+
+
+
+            <tbody>
+
+
+            {% if all_rev %}
+
+
+                {% for r in all_rev %}
+
+                <tr>
+
+
+                    <!-- ID -->
+
+                    <td>
+
+                        <span class="member-id">
+
+                            #{{ r[0] }}
+
+                        </span>
+
+                    </td>
+
+
+
+                    <!-- Name -->
+
+                    <td>
+
+                        <div class="member-name">
+
+                            <i class="bi bi-person-fill"></i>
+
+                            {{ r[1] }}
+
+                        </div>
+
+                    </td>
+
+
+
+                    <!-- Phone -->
+
+                    <td>
+
+                        <span class="phone">
+
+                            <i class="bi bi-telephone-fill"></i>
+
+                            {{ r[2] }}
+
+                        </span>
+
+                    </td>
+
+
+
+                    <!-- Amount -->
+
+                    <td>
+
+                        <span class="amount">
+
+                            <i class="bi bi-cash-coin"></i>
+
+                            {{ r[3] }}
+
+                        </span>
+
+                    </td>
+
+
+
+                    <!-- Payment Date -->
+
+                    <td>
+
+                        <i class="bi bi-calendar-check"></i>
+
+                        {{ r[4] }}
+
+                    </td>
+
+
+
+                    <!-- Status -->
+
+                    <td>
+
+
+                        {% if r[5] == "paid" %}
+
+                            <span class="status status-paid">
+
+                                <i class="bi bi-check-circle-fill"></i>
+
+                                Paid
+
+                            </span>
+
+
+                        {% elif r[5] == "pending" %}
+
+                            <span class="status status-pending">
+
+                                <i class="bi bi-clock-fill"></i>
+
+                                Pending
+
+                            </span>
+
+
+                        {% elif r[5] == "failed" %}
+
+                            <span class="status status-failed">
+
+                                <i class="bi bi-x-circle-fill"></i>
+
+                                Failed
+
+                            </span>
+
+
+                        {% else %}
+
+                            <span class="status status-pending">
+
+                                {{ r[5] }}
+
+                            </span>
+
+                        {% endif %}
+
+
+                    </td>
+
+
+
+                    <!-- Plan -->
+
+                    <td>
+
+                        <span class="plan-badge">
+
+                            <i class="bi bi-gem"></i>
+
+                            {{ r[6] }}
+
+                        </span>
+
+                    </td>
+
+
+                
+<td>
+    <a href="/delete_paymants/{{r[7]}}"
+       style="
+           display: inline-block;
+           background-color: #dc3545;
+           color: white;
+           padding: 6px 12px;
+           border-radius: 6px;
+           text-decoration: none;
+           font-size: 14px;
+           font-weight: bold;
+           transition: 0.3s;
+       ">
+        إالغاء إشتراك
+    </a>
+</td>                
+                </tr>
+
+
+
+                {% endfor %}
+
+
+            {% else %}
+
+
+                <tr>
+
+                    <td colspan="7">
+
+                        <div class="empty">
+
+                            <i class="bi bi-wallet2"></i>
+
+                            <h4>
+
+                                No Payment Records
+
+                            </h4>
+
+                            <p>
+
+                                There are currently no payment transactions.
+
+                            </p>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+
+            {% endif %}
+
+
+            </tbody>
+
+
+        </table>
+
+
+    </div>
+
+
+</div>
+
+
+</div>
+
+</body>
+
+</html>

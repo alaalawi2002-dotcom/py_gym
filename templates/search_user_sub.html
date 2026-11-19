@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Search Member</title>
+
+
+<!-- Bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+<!-- Icons -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+
+
+<style>
+
+
+body{
+
+    background:linear-gradient(135deg,#4e73df,#6f42c1);
+
+    min-height:100vh;
+
+    padding:40px;
+
+    font-family:Arial, Helvetica, sans-serif;
+
+}
+
+
+
+.card{
+
+    border:none;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.25);
+
+}
+
+
+
+.card-header{
+
+    background:#212529;
+
+    color:white;
+
+    padding:25px;
+
+}
+
+
+
+.card-header h2{
+
+    margin:0;
+
+    font-weight:bold;
+
+}
+
+
+
+.search-box{
+
+    margin-bottom:25px;
+
+}
+
+
+
+.form-control{
+
+    border-radius:30px 0 0 30px;
+
+    padding:12px 20px;
+
+}
+
+
+
+.btn-search{
+
+    border-radius:0 30px 30px 0;
+
+    padding:12px 25px;
+
+}
+
+
+
+.table{
+
+    margin-bottom:0;
+
+}
+
+
+
+.table thead{
+
+    background:#4e73df;
+
+    color:white;
+
+}
+
+
+
+.table th,
+
+.table td{
+
+    text-align:center;
+
+    vertical-align:middle;
+
+}
+
+
+
+.table tbody tr:hover{
+
+    background:#f4f7ff;
+
+}
+
+
+
+.badge-active{
+
+    background:#198754;
+
+    padding:8px 15px;
+
+    border-radius:30px;
+
+}
+
+
+
+.badge-expired{
+
+    background:#dc3545;
+
+    padding:8px 15px;
+
+    border-radius:30px;
+
+}
+
+
+
+.badge-paid{
+
+    background:#198754;
+
+    padding:8px 15px;
+
+    border-radius:30px;
+
+}
+
+
+
+.badge-not-paid{
+
+    background:#dc3545;
+
+    padding:8px 15px;
+
+    border-radius:30px;
+
+}
+
+
+
+</style>
+
+
+</head>
+
+
+
+<body>
+
+
+
+<div class="container">
+
+
+
+<div class="card">
+
+
+
+<div class="card-header">
+
+
+<h2>
+
+<i class="bi bi-search"></i>
+
+Search Member Subscription
+
+</h2>
+
+
+<p class="mb-0 mt-2">
+
+Gym Membership Management System
+
+</p>
+
+
+</div>
+
+
+
+
+<div class="card-body">
+
+
+
+<!-- Search Form -->
+
+<form method="POST" action="/search_user_sub">
+
+
+<div class="input-group search-box">
+
+
+<input 
+
+type="text"
+
+name="search"
+
+class="form-control"
+
+placeholder="Search by name or phone">
+
+
+<button class="btn btn-primary btn-search">
+
+
+<i class="bi bi-search"></i>
+
+Search
+
+
+</button>
+
+
+
+</div>
+
+
+</form>
+
+
+
+
+
+<div class="table-responsive">
+
+
+<table class="table table-bordered table-hover">
+
+
+
+<thead>
+
+
+<tr>
+
+
+<th>ID</th>
+
+<th>
+<i class="bi bi-person"></i>
+Name
+</th>
+
+
+<th>
+<i class="bi bi-telephone"></i>
+Phone
+</th>
+
+
+<th>Age</th>
+
+
+<th>Category</th>
+
+
+<th>Plan</th>
+
+
+<th>Start</th>
+
+
+<th>End</th>
+
+
+<th>Status</th>
+
+
+<th>Payment</th>
+
+
+
+</tr>
+
+
+</thead>
+
+
+
+<tbody>
+
+
+
+{% if one_sub %}
+
+
+
+{% for u in one_sub %}
+
+
+<tr>
+
+
+<td>{{u[0]}}</td>
+
+
+<td>{{u[1]}}</td>
+
+
+<td>{{u[2]}}</td>
+
+
+<td>{{u[3]}}</td>
+
+
+<td>
+
+<span class="badge bg-secondary">
+
+{{u[4]}}
+
+</span>
+
+
+</td>
+
+
+
+<td>{{u[5]}}</td>
+
+
+<td>{{u[6]}}</td>
+
+
+<td>{{u[7]}}</td>
+
+
+
+<td>
+
+
+{% if u[8]=='active' %}
+
+
+<span class="badge-active text-white">
+
+Active
+
+</span>
+
+
+{% else %}
+
+
+<span class="badge-expired text-white">
+
+Expired
+
+</span>
+
+
+{% endif %}
+
+
+</td>
+
+
+
+
+<td>
+
+
+{% if u[10]=='تم الدفع' %}
+
+
+<span class="badge-paid text-white">
+
+<i class="bi bi-check-circle"></i>
+
+Paid
+
+</span>
+
+
+{% else %}
+
+
+<span class="badge-not-paid text-white">
+
+<i class="bi bi-x-circle"></i>
+
+Not Paid
+
+</span>
+
+
+{% endif %}
+
+
+</td>
+
+
+
+</tr>
+
+
+
+{% endfor %}
+
+
+
+{% else %}
+
+
+
+<tr>
+
+
+<td colspan="10">
+
+
+<h5 class="text-muted">
+
+<i class="bi bi-exclamation-circle"></i>
+
+No Results Found
+
+</h5>
+
+
+</td>
+
+
+</tr>
+
+
+
+{% endif %}
+
+
+
+</tbody>
+
+
+</table>
+
+
+
+</div>
+
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+</body>
+
+</html>

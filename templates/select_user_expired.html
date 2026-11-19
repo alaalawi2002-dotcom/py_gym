@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Expired Subscriptions</title>
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+        rel="stylesheet">
+
+
+    <style>
+
+        body {
+            margin: 0;
+            background: #f4f7fb;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            color: #212529;
+        }
+
+
+        /* =========================
+           Main Container
+        ========================= */
+
+        .page-container {
+            padding: 40px;
+        }
+
+
+        /* =========================
+           Header
+        ========================= */
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+
+        .title-area {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+
+        .title-icon {
+            width: 58px;
+            height: 58px;
+            border-radius: 16px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #fff0f1;
+            color: #dc3545;
+
+            font-size: 27px;
+        }
+
+
+        .title-area h1 {
+            margin: 0;
+            font-size: 30px;
+            font-weight: 800;
+        }
+
+
+        .title-area p {
+            margin: 5px 0 0;
+            color: #7a8491;
+            font-size: 14px;
+        }
+
+
+        /* =========================
+           Counter
+        ========================= */
+
+        .expired-counter {
+
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            background: #fff0f1;
+            color: #dc3545;
+
+            padding: 10px 18px;
+
+            border-radius: 30px;
+
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+
+        /* =========================
+           Card
+        ========================= */
+
+        .table-card {
+
+            background: white;
+
+            border-radius: 20px;
+
+            border: 1px solid #e7ebf0;
+
+            box-shadow:
+                0 10px 35px rgba(30, 40, 60, 0.07);
+
+            overflow: hidden;
+        }
+
+
+        /* =========================
+           Card Header
+        ========================= */
+
+        .card-header-custom {
+
+            padding: 22px 25px;
+
+            border-bottom: 1px solid #edf0f4;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+
+        .card-header-custom h5 {
+
+            margin: 0;
+
+            font-weight: 750;
+
+            color: #343a40;
+        }
+
+
+        /* =========================
+           Table
+        ========================= */
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+
+        table {
+            width: 100%;
+            min-width: 1100px;
+            border-collapse: collapse;
+        }
+
+
+        thead {
+            background: #f8f9fc;
+        }
+
+
+        th {
+
+            padding: 17px 18px;
+
+            color: #737d8a;
+
+            font-size: 12px;
+
+            font-weight: 800;
+
+            text-transform: uppercase;
+
+            letter-spacing: .5px;
+
+            border-bottom: 1px solid #e9edf2;
+
+            white-space: nowrap;
+        }
+
+
+        td {
+
+            padding: 18px;
+
+            border-bottom: 1px solid #f0f2f5;
+
+            vertical-align: middle;
+
+            white-space: nowrap;
+        }
+
+
+        tbody tr {
+            transition: .2s;
+        }
+
+
+        tbody tr:hover {
+            background: #fafbff;
+        }
+
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+
+        /* =========================
+           Member
+        ========================= */
+
+        .member-name {
+
+            font-weight: 750;
+
+            color: #212529;
+        }
+
+
+        .member-id {
+
+            font-size: 12px;
+
+            color: #9aa3ad;
+
+            margin-top: 3px;
+        }
+
+
+        .member-box {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+        }
+
+
+        .avatar {
+
+            width: 42px;
+            height: 42px;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            background: #eef2ff;
+
+            color: #355cff;
+
+            font-size: 18px;
+        }
+
+
+        /* =========================
+           Phone
+        ========================= */
+
+        .phone {
+
+            color: #198754;
+
+            font-weight: 650;
+        }
+
+
+        /* =========================
+           Category
+        ========================= */
+
+        .category {
+
+            background: #f1f3f5;
+
+            padding: 7px 12px;
+
+            border-radius: 20px;
+
+            color: #495057;
+
+            font-size: 13px;
+
+            font-weight: 650;
+        }
+
+
+        /* =========================
+           Dates
+        ========================= */
+
+        .date {
+
+            color: #495057;
+
+            font-size: 14px;
+        }
+
+
+        .expired-date {
+
+            color: #dc3545;
+
+            font-weight: 750;
+        }
+
+
+        /* =========================
+           Price
+        ========================= */
+
+        .price {
+
+            color: #198754;
+
+            font-weight: 800;
+
+            font-size: 15px;
+        }
+
+
+        /* =========================
+           Status
+        ========================= */
+
+        .status {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 6px;
+
+            padding: 7px 13px;
+
+            border-radius: 30px;
+
+            background: #fff0f1;
+
+            color: #dc3545;
+
+            font-size: 12px;
+
+            font-weight: 800;
+        }
+
+
+        .status::before {
+
+            content: "";
+
+            width: 7px;
+            height: 7px;
+
+            background: #dc3545;
+
+            border-radius: 50%;
+        }
+
+
+        /* =========================
+           Plan
+        ========================= */
+
+        .plan {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 6px;
+
+            background: #f0ebff;
+
+            color: #6f42c1;
+
+            padding: 7px 13px;
+
+            border-radius: 30px;
+
+            font-size: 13px;
+
+            font-weight: 700;
+        }
+
+
+        /* =========================
+           Update Button
+        ========================= */
+
+        .update {
+
+            border: none;
+
+            background: #355cff;
+
+            color: white;
+
+            padding: 9px 17px;
+
+            border-radius: 9px;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: .2s;
+        }
+
+
+        .update:hover {
+
+            background: #2448e8;
+
+            transform: translateY(-1px);
+
+        }
+
+
+        /* =========================
+           Inputs
+        ========================= */
+
+        input,
+        select {
+
+            border: 1px solid #dfe4ea;
+
+            border-radius: 8px;
+
+            padding: 8px 10px;
+
+            outline: none;
+
+            font-size: 13px;
+
+            background: white;
+        }
+
+
+        input:focus,
+        select:focus {
+
+            border-color: #355cff;
+
+            box-shadow:
+                0 0 0 3px rgba(53, 92, 255, .10);
+        }
+
+
+        /* =========================
+           Empty
+        ========================= */
+
+        .empty {
+
+            text-align: center;
+
+            padding: 70px 20px;
+
+            color: #7b8490;
+        }
+
+
+        .empty i {
+
+            font-size: 55px;
+
+            color: #198754;
+
+            display: block;
+
+            margin-bottom: 15px;
+        }
+
+
+        .empty h4 {
+
+            color: #343a40;
+
+            font-weight: 750;
+        }
+
+
+        /* =========================
+           Mobile
+        ========================= */
+
+        @media(max-width: 768px) {
+
+            .page-container {
+                padding: 20px;
+            }
+
+
+            .title-area h1 {
+                font-size: 24px;
+            }
+
+
+            .table-card {
+                border-radius: 14px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="page-container">
+
+
+    <!-- =========================
+         Header
+    ========================= -->
+
+    <div class="page-header">
+
+
+        <div class="title-area">
+
+
+            <div class="title-icon">
+
+                <i class="bi bi-clock-history"></i>
+
+            </div>
+
+
+            <div>
+
+                <h1>
+
+                    Expired Subscriptions
+
+                </h1>
+
+
+                <p>
+
+                    Manage members whose subscriptions have expired
+
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="expired-counter">
+
+            <i class="bi bi-exclamation-circle"></i>
+
+            {{ all_expired|length }} Expired
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =========================
+         Table Card
+    ========================= -->
+
+    <div class="table-card">
+
+
+        <div class="card-header-custom">
+
+            <h5>
+
+                <i class="bi bi-people me-2"></i>
+
+                Expired Members
+
+            </h5>
+
+        </div>
+
+
+
+        <div class="table-wrapper">
+
+
+            <table>
+
+
+                <thead>
+
+                    <tr>
+
+                        <th>Member</th>
+
+                        <th>Phone</th>
+
+                        <th>Age</th>
+
+                        <th>Category</th>
+
+                        <th>Start Date</th>
+
+                        <th>End Date</th>
+
+                        <th>Price</th>
+
+                        <th>Status</th>
+
+                        <th>Plan</th>
+
+                        <th>Actions</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+
+                {% for e in all_expired %}
+
+
+                    <tr data-id="{{ e[10] }}">
+
+
+                        <!-- Member -->
+
+                        <td>
+
+                            <div class="member-box">
+
+                                <div class="avatar">
+
+                                    <i class="bi bi-person-fill"></i>
+
+                                </div>
+
+
+                                <div>
+
+                                    <div class="member-name">
+
+                                        {{ e[1] }}
+
+                                    </div>
+
+
+                                    <div class="member-id">
+
+                                        ID #{{ e[0] }}
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <!-- Phone -->
+
+                        <td>
+
+                            <span class="phone">
+
+                                <i class="bi bi-telephone-fill me-1"></i>
+
+                                {{ e[2] }}
+
+                            </span>
+
+                        </td>
+
+
+                        <!-- Age -->
+
+                        <td>
+
+                            {{ e[3] }}
+
+                        </td>
+
+
+                        <!-- Category -->
+
+                        <td>
+
+                            <span class="category">
+
+                                {{ e[4] }}
+
+                            </span>
+
+                        </td>
+
+
+                        <!-- Start date -->
+
+                        <td class="start_date">
+
+                            <span class="date">
+
+                                <i class="bi bi-calendar me-1"></i>
+
+                                {{ e[5] }}
+
+                            </span>
+
+                        </td>
+
+
+                        <!-- End date -->
+
+                        <td class="end_date">
+
+                            <span class="date expired-date">
+
+                                <i class="bi bi-calendar-x me-1"></i>
+
+                                {{ e[6] }}
+
+                            </span>
+
+                        </td>
+
+
+                        <!-- Price -->
+
+                        <td class="price">
+
+                            <i class="bi bi-cash-coin me-1"></i>
+
+                            {{ e[7] }}
+
+                        </td>
+
+
+                        <!-- Status -->
+
+                        <td>
+
+                            <span class="status">
+
+                                {{ e[8] }}
+
+                            </span>
+
+                        </td>
+
+
+                        <!-- Plan -->
+
+                        <td class="plan">
+
+                            <i class="bi bi-gem"></i>
+
+                            {{ e[9] }}
+
+                        </td>
+
+
+                        <!-- Update -->
+
+                        <td>
+
+                            <button class="update">
+
+                                <i class="bi bi-pencil-square me-1"></i>
+
+                                Update
+
+                            </button>
+
+                        </td>
+
+
+                    </tr>
+
+
+                {% else %}
+
+
+                    <tr>
+
+                        <td colspan="10">
+
+                            <div class="empty">
+
+                                <i class="bi bi-check-circle"></i>
+
+                                <h4>
+
+                                    No Expired Subscriptions
+
+                                </h4>
+
+                                <p>
+
+                                    All members currently have active subscriptions.
+
+                                </p>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+
+                {% endfor %}
+
+
+                </tbody>
+
+
+            </table>
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+
+let buttons = document.querySelectorAll(".update");
+
+
+buttons.forEach(function(button){
+
+
+    button.onclick = function(){
+
+
+        let row = button.closest("tr");
+
+
+        let start_date =
+            row.querySelector(".start_date");
+
+
+        let end_date =
+            row.querySelector(".end_date");
+
+
+        let price =
+            row.querySelector(".price");
+
+
+        let plan =
+            row.querySelector(".plan");
+
+
+        // =========================
+        // Start Date
+        // =========================
+
+        let input_start =
+            document.createElement("input");
+
+
+        input_start.type = "date";
+
+
+        input_start.value =
+            start_date.textContent.trim();
+
+
+        start_date.innerHTML = "";
+
+        start_date.appendChild(input_start);
+
+
+        // =========================
+        // End Date
+        // =========================
+
+        let input_end =
+            document.createElement("input");
+
+
+        input_end.type = "date";
+
+
+        input_end.value =
+            end_date.textContent.trim();
+
+
+        end_date.innerHTML = "";
+
+        end_date.appendChild(input_end);
+
+
+        // =========================
+        // Price
+        // =========================
+
+        let input_price =
+            document.createElement("input");
+
+
+        input_price.type = "number";
+
+
+        input_price.value =
+            price.textContent.trim();
+
+
+        price.innerHTML = "";
+
+        price.appendChild(input_price);
+
+
+        // =========================
+        // Plan
+        // =========================
+
+        let select_plan =
+            document.createElement("select");
+
+
+        select_plan.innerHTML = `
+
+            <option value="1">شهر</option>
+
+            <option value="2">3 أشهر</option>
+
+            <option value="3">سنة</option>
+
+        `;
+
+
+        plan.innerHTML = "";
+
+        plan.appendChild(select_plan);
+
+
+        // =========================
+        // Change Button
+        // =========================
+
+        button.textContent = "Save";
+
+
+        // =========================
+        // Save
+        // =========================
+
+        button.onclick = function(){
+
+
+            fetch("/update_subscription", {
+
+                method: "POST",
+
+                body: new URLSearchParams({
+
+                    id: row.dataset.id,
+
+                    start_date:
+                        input_start.value,
+
+                    end_date:
+                        input_end.value,
+
+                    price:
+                        input_price.value,
+
+                    plan_id:
+                        select_plan.value
+
+                })
+
+            })
+
+
+            .then(function(res){
+
+                return res.text();
+
+            })
+
+
+            .then(function(data){
+
+                alert(data);
+
+                location.reload();
+
+            });
+
+
+        };
+
+
+    };
+
+
+});
+
+
+</script>
+
+
+</body>
+
+</html>
